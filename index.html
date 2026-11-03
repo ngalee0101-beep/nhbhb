@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STYLEK | Korean Fashion Store</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #111;
+    background: #fff;
+}
+
+header {
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: -2px;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #111;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #999;
+}
+
+.cart {
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.hero {
+    height: 500px;
+    background:
+    linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)),
+    url("https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=1600");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding: 8%;
+    color: white;
+}
+
+.hero p {
+    letter-spacing: 3px;
+    font-size: 13px;
+}
+
+.hero h1 {
+    font-size: 65px;
+    margin: 20px 0 35px;
+    line-height: 1;
+}
+
+.shop-btn {
+    display: inline-block;
+    background: white;
+    color: black;
+    padding: 16px 30px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.shop-btn:hover {
+    background: #ddd;
+}
+
+.categories {
+    padding: 65px 5%;
+    text-align: center;
+}
+
+h2 {
+    font-size: 27px;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.category {
+    height: 230px;
+    position: relative;
+    overflow: hidden;
+}
+
+.category img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .4s;
+}
+
+.category:hover img {
+    transform: scale(1.05);
+}
+
+.category span {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.products {
+    padding: 50px 5% 80px;
+}
+
+.product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.search {
+    padding: 12px;
+    border: 1px solid #ddd;
+    width: 220px;
+    outline: none;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px 15px;
+}
+
+.product img {
+    width: 100%;
+    height: 310px;
+    object-fit: cover;
+    background: #eee;
+    cursor: pointer;
+}
+
+.brand {
+    font-size: 11px;
+    color: #888;
+    margin-top: 12px;
+}
+
+.product h3 {
+    font-size: 14px;
+    margin: 8px 0;
+}
+
+.price {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.product button {
+    width: 100%;
+    padding: 13px;
+    background: #111;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.product button:hover {
+    background: #555;
+}
+
+.newsletter {
+    background: #f5f5f5;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.newsletter p {
+    color: #777;
+    font-size: 13px;
+    margin: 15px;
+}
+
+.newsletter input {
+    padding: 14px;
+    width: 250px;
+    border: 1px solid #ddd;
+}
+
+.newsletter button {
+    padding: 14px 20px;
+    border: none;
+    background: #111;
+    color: white;
+    cursor: pointer;
+}
+
+footer {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 45px 20px;
+}
+
+footer p {
+    color: #aaa;
+    font-size: 11px;
+    margin-top: 12px;
+}
+
+.cart-panel {
+    display: none;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 350px;
+    max-width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 200;
+    padding: 25px;
+    box-shadow: -5px 0 20px #ccc;
+    overflow-y: auto;
+}
+
+.cart-panel h2 {
+    margin-bottom: 25px;
+}
+
+.cart-item {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+    font-size: 13px;
+}
+
+.close-cart {
+    float: right;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 22px;
+}
+
+#cart-total {
+    margin-top: 25px;
+    font-weight: bold;
+}
+
+@media(max-width: 768px) {
+    header {
+        padding: 0 4%;
+    }
+
+    nav {
+        gap: 10px;
+    }
+
+    nav a {
+        font-size: 9px;
+    }
+
+    .logo {
+        font-size: 23px;
+    }
+
+    .cart {
+        font-size: 10px;
+    }
+
+    .hero {
+        height: 380px;
+    }
+
+    .hero h1 {
+        font-size: 45px;
+    }
+
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .product img {
+        height: 230px;
+    }
+
+    .product-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">STYLEK.</div>
+
+    <nav>
+        <a href="#">HOME</a>
+        <a href="#products">WOMEN</a>
+        <a href="#products">MEN</a>
+        <a href="#products">SHOES</a>
+        <a href="#products">BAGS</a>
+        <a href="#products">SALE</a>
+    </nav>
+
+    <div class="cart" onclick="openCart()">
+        🛍 CART (<span id="cart-count">0</span>)
+    </div>
+</header>
+
+<section class="hero">
+    <div>
+        <p>STYLEK FALL / WINTER 2026</p>
+        <h1>FIND YOUR<br>OWN STYLE.</h1>
+        <a href="#products" class="shop-btn">SHOP NOW →</a>
+    </div>
+</section>
+
+<section class="categories">
+    <h2>SHOP BY CATEGORY</h2>
+
+    <div class="categories-grid">
+
+        <div class="category">
+            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600">
+            <span>WOMEN</span>
+        </div>
+
+        <div class="category">
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600">
+            <span>MEN</span>
+        </div>
+
+        <div class="category">
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600">
+            <span>SHOES</span>
+        </div>
+
+        <div class="category">
+            <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600">
+            <span>BAGS</span>
+        </div>
+
+    </div>
+</section>
+
+<section class="products" id="products">
+
+    <div class="product-header">
+        <h2>NEW ARRIVALS</h2>
+
+        <input
+            type="text"
+            class="search"
+            id="search"
+            placeholder="Search products..."
+            oninput="searchProducts()"
+        >
+    </div>
+
+    <div class="product-grid" id="product-list">
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600">
+            <p class="brand">MUSINSA STANDARD</p>
+            <h3>Basic Cotton T-Shirt</h3>
+            <p class="price">$29.00</p>
+            <button onclick="addToCart('Basic Cotton T-Shirt',29)">ADD TO CART</button>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1548126032-079a0fb0099d?w=600">
+            <p class="brand">THISISNEVERTHAT</p>
+            <h3>Oversized Jacket</h3>
+            <p class="price">$89.00</p>
+            <button onclick="addToCart('Oversized Jacket',89)">ADD TO CART</button>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600">
+            <p class="brand">ASICS</p>
+            <h3>Sport Running Shoes</h3>
+            <p class="price">$120.00</p>
+            <button onclick="addToCart('Sport Running Shoes',120)">ADD TO CART</button>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600">
+            <p class="brand">MATIN KIM</p>
+            <h3>Minimal Shoulder Bag</h3>
+            <p class="price">$75.00</p>
+            <button onclick="addToCart('Minimal Shoulder Bag',75)">ADD TO CART</button>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600">
+            <p class="brand">REST & RECREATION</p>
+            <h3>Elegant Winter Coat</h3>
+            <p class="price">$150.00</p>
+            <button onclick="addToCart('Elegant Winter Coat',150)">ADD TO CART</button>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600">
+            <p class="brand">COVERNAT</p>
+            <h3>Classic Sweatshirt</h3>
+            <p class="price">$65.00</p>
+            <button onclick="addToCart('Classic Sweatshirt',65)">ADD TO CART</button>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600">
+            <p class="brand">ROH SEOUL</p>
+            <h3>Leather Mini Bag</h3>
+            <p class="price">$99.00</p>
+            <button onclick="addToCart('Leather Mini Bag',99)">ADD TO CART</button>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=600">
+            <p class="brand">OPEN YY</p>
+            <h3>Everyday Fashion Top</h3>
+            <p class="price">$39.00</p>
+            <button onclick="addToCart('Everyday Fashion Top',39)">ADD TO CART</button>
+        </div>
+
+    </div>
+</section>
+
+<section class="newsletter">
+    <h2>JOIN THE STYLEK COMMUNITY</h2>
+    <p>Get updates about new arrivals and exclusive offers.</p>
+
+    <input type="email" id="email" placeholder="Enter your email">
+    <button onclick="subscribe()">SUBSCRIBE</button>
+</section>
+
+<footer>
+    <h2>STYLEK.</h2>
+    <p>Contemporary Korean Fashion.</p>
+    <p>ABOUT | CUSTOMER CARE | SHIPPING & RETURNS</p>
+    <p>© 2026 STYLEK. ALL RIGHTS RESERVED.</p>
+</footer>
+
+<div class="cart-panel" id="cart-panel">
+    <button class="close-cart" onclick="closeCart()">×</button>
+    <h2>YOUR CART</h2>
+
+    <div id="cart-items">
+        Your cart is empty.
+    </div>
+
+    <p id="cart-total">Total: $0.00</p>
+</div>
+
+<script>
+let cart = [];
+
+function addToCart(name, price) {
+    cart.push({name:name, price:price});
+    updateCart();
+
+    alert(name + " added to cart!");
+}
+
+function updateCart() {
+    document.getElementById("cart-count").innerText = cart.length;
+
+    let items = document.getElementById("cart-items");
+    let total = 0;
+
+    if(cart.length === 0) {
+        items.innerHTML = "Your cart is empty.";
+    } else {
+        items.innerHTML = cart.map((item,index) => {
+            total += item.price;
+
+            return `
+                <div class="cart-item">
+                    <b>${item.name}</b>
+                    <p>$${item.price.toFixed(2)}</p>
+                    <button onclick="removeItem(${index})">Remove</button>
+                </div>
+            `;
+        }).join("");
+    }
+
+    document.getElementById("cart-total").innerText =
+        "Total: $" + total.toFixed(2);
+}
+
+function removeItem(index) {
+    cart.splice(index,1);
+    updateCart();
+}
+
+function openCart() {
+    document.getElementById("cart-panel").style.display = "block";
+}
+
+function closeCart() {
+    document.getElementById("cart-panel").style.display = "none";
+}
+
+function searchProducts() {
+    let input = document.getElementById("search").value.toLowerCase();
+    let products = document.querySelectorAll(".product");
+
+    products.forEach(product => {
+        let name = product.innerText.toLowerCase();
+
+        product.style.display =
+            name.includes(input) ? "block" : "none";
+    });
+}
+
+function subscribe() {
+    let email = document.getElementById("email").value;
+
+    if(email && email.includes("@")) {
+        alert("Thank you for joining STYLEK!");
+        document.getElementById("email").value = "";
+    } else {
+        alert("Please enter a valid email.");
+    }
+}
+</script>
+
+</body>
+</html>
